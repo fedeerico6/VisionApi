@@ -2,6 +2,7 @@ package com.seminario.apiVision.controllers;
 
 import com.google.cloud.vision.v1.*;
 import com.google.protobuf.ByteString;
+import com.google.protobuf.*;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -23,7 +24,7 @@ public class PruebaController {
         try (ImageAnnotatorClient vision = ImageAnnotatorClient.create()) {
             cont = 0;
             // The path to the image file to annotate
-            String fileName = "C:\\Users\\Federico\\Documents\\coca.jpeg";
+            String fileName = "C:\\Users\\Federico\\Documents\\esto.jpg";
 
             // Reads the image file into memory
             Path path = Paths.get(fileName);
@@ -39,10 +40,10 @@ public class PruebaController {
                     .setImage(img)
                     .build();
             requests.add(request);
-
             // Performs label detection on the image file
             BatchAnnotateImagesResponse response = vision.batchAnnotateImages(requests);
             List<AnnotateImageResponse> responses = response.getResponsesList();
+
             HashMap<String,String> map = new HashMap<>();
             for (AnnotateImageResponse res : responses) {
                 if (res.hasError()) {
