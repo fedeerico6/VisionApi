@@ -3,6 +3,7 @@ package com.seminario.apiVision.controllers;
 import com.google.cloud.vision.v1.*;
 import com.google.protobuf.ByteString;
 import com.google.protobuf.*;
+import com.seminario.apiVision.models.ApiVisionRequest;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -18,11 +19,10 @@ import java.util.List;
 @RestController
 @RequestMapping("/prueba")
 public class PruebaController {
-    int cont;
+
     @GetMapping
-    public HashMap<String,String> prueba(){
+    public List<ApiVisionRequest> prueba(){
         try (ImageAnnotatorClient vision = ImageAnnotatorClient.create()) {
-            cont = 0;
             // The path to the image file to annotate
             String fileName = "C:\\Users\\Federico\\Documents\\esto.jpg";
 
@@ -43,8 +43,7 @@ public class PruebaController {
             // Performs label detection on the image file
             BatchAnnotateImagesResponse response = vision.batchAnnotateImages(requests);
             List<AnnotateImageResponse> responses = response.getResponsesList();
-
-            HashMap<String,String> map = new HashMap<>();
+            List<ApiVisionRequest> respuesta = new ArrayList<>();
             for (AnnotateImageResponse res : responses) {
                 if (res.hasError()) {
                     System.out.printf("Error: %s\n", res.getError().getMessage());
@@ -52,13 +51,15 @@ public class PruebaController {
                 }
                 for (EntityAnnotation annotation : res.getLabelAnnotationsList()) {
                     annotation.getAllFields().forEach((k, v) -> {
-                        System.out.printf("%s : %s\n", k, v.toString());
-                        map.put((k.toString()+String.valueOf(cont)), v.toString());
-                        cont++;
+                        String clave = k.toString();
+                        String[] claves = clave.split("\\.");
+                        clave = claves[claves.length-1];
+                        ApiVisionRequest apiVisionRequest = new ApiVisionRequest(clave,v.toString());
+                        respuesta.add(apiVisionRequest);
                     });
                 }
             }
-            return map;
+            return respuesta;
         } catch (IOException e) {
             e.printStackTrace();
             return null;
