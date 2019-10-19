@@ -1,7 +1,9 @@
+<br>
+<h5>Cargar imagen:</h5> <hr>
 <form (onSubmit)='send()'>
     <div class="custom-file form-group btn-margin-top">
-        <input type="file" class="custom-file-input" id="customFile">
+        <input type="file" class="custom-file-input" id="customFile" name="file" [(ngModel)]="file" (change)="send()">
         <label class="custom-file-label" for="customFile">Choose file</label>
     </div>
-    <button class="btn btn-primary btn-margin-top" type="submit">Enviar</button>
+    <button class="btn btn-primary btn-margin-top" type="submit"  >Enviar</button>
 </form>
