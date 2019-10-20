@@ -1,5 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { ImageService } from 'src/app/services/image.service';
+import { ImageSend } from 'src/app/models/image-send';
+import { ImageResponse } from 'src/app/models/image-response';
 
 @Component({
   selector: 'app-image-search',
@@ -7,21 +9,22 @@ import { ImageService } from 'src/app/services/image.service';
   styleUrls: ['./image-search.component.css']
 })
 export class ImageSearchComponent implements OnInit {
-  file : File;
+  file : string;
+  @Input()
+  imageResponse : Array<ImageResponse> = new Array()
+
   constructor(private imageService : ImageService) { }
 
   ngOnInit() {
   }
   
   send() {
-    alert("subido!");
-    //let reader = new FileReader();
-    //reader.readAsDataURL(this.file);
-    console.log(this.file);
-    this.imageService.sendRequest(this.file).then(response => {
-    // mostrar la respuesta
-    console.log(response);
+    console.log(this.file)
+    this.imageService.sendRequest(new ImageSend(this.file)).then(response => {
+      this.imageResponse = response;
+      console.log(this.imageResponse)
     }).catch(error =>{
+      console.log(error)
     });
     
   }

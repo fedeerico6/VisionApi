@@ -1,8 +1,23 @@
 <!--*ngIf results /// si hay resultados, q muestre esta parte-->
 <br><h5>Resultado:</h5><hr>
 <!--*ngFor-->
-<ul class="list-group">
-    <li class="list-group-item list-group-item-primary">Clave</li>
-    <li class="list-group-item">Valor</li>
+<ul class="list-group" *ngFor='let image of imageResponse'>
+
+    <li class="list-group-item list-group-item-primary">{{ image.clave }}</li>
+    <li class="list-group-item">{{ image.valor }}</li>
     
 </ul>
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th scope="col">Nose</th>
+            <th scope="col">Nose</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor='let image of imageResponse'>
+            <td>{{ image.clave }}</td>
+            <td>{{ image.valor }}</td>
+        </tr>
+    </tbody>
+</table>

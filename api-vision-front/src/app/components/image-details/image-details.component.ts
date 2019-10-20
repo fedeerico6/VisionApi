@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
+import { ImageResponse } from 'src/app/models/image-response';
 
 @Component({
   selector: 'app-image-details',
@@ -6,7 +7,9 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./image-details.component.css']
 })
 export class ImageDetailsComponent implements OnInit {
-
+  @Input()
+  imageResponse : Array<ImageResponse> = new Array()
+  
   constructor() { }
 
   ngOnInit() {

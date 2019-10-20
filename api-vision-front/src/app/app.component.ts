@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { ImageResponse } from './models/image-response';
 
 @Component({
   selector: 'app-root',
@@ -7,4 +8,5 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'api-vision-front';
+  imageResponse = new Array<ImageResponse>()
 }
