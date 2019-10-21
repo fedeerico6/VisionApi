@@ -1,17 +1,21 @@
-<!--*ngIf results /// si hay resultados, q muestre esta parte-->
+<ng-container *ngIf="imageResponse.length >0">
 <br><h5>Resultado:</h5><hr>
-<!--*ngFor-->
-<ul class="list-group" *ngFor='let image of imageResponse'>
+<!--if hay resultados-->
+<ng-container *ngFor='let image of imageResponse'>
+<ul class="list-group" *ngIf="image.clave == 'description' || image.clave =='score'">
 
-    <li class="list-group-item list-group-item-primary">{{ image.clave }}</li>
-    <li class="list-group-item">{{ image.valor }}</li>
+    <li class="list-group-item list-group-item-primary" *ngIf="image.clave == 'description'">{{ image.valor }}</li>
+    <li class="list-group-item" *ngIf="image.clave =='score'">{{ image.valor }}</li>
     
 </ul>
+</ng-container>
+</ng-container>
+<!--
 <table class="table table-striped">
     <thead>
         <tr>
-            <th scope="col">Nose</th>
-            <th scope="col">Nose</th>
+            <th scope="col">Descripcion</th>
+            <th scope="col">Valor</th>
         </tr>
     </thead>
     <tbody>
@@ -20,4 +24,4 @@
             <td>{{ image.valor }}</td>
         </tr>
     </tbody>
-</table>
+</table> -->

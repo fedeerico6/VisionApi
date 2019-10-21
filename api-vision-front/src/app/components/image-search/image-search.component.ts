@@ -10,7 +10,7 @@ import { ImageResponse } from 'src/app/models/image-response';
 })
 export class ImageSearchComponent implements OnInit {
   file : string;
-  @Input()
+  
   imageResponse : Array<ImageResponse> = new Array()
 
   constructor(private imageService : ImageService) { }

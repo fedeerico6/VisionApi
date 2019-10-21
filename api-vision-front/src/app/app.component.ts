@@ -8,5 +8,5 @@ import { ImageResponse } from './models/image-response';
 })
 export class AppComponent {
   title = 'api-vision-front';
-  imageResponse = new Array<ImageResponse>()
+  //imageResponse = new Array<ImageResponse>() // borrar
 }
